@@ -1,10 +1,21 @@
 module.exports={
     entry:'./src/index.js',
     output:{
-        path:path.join(__dirname,'dist'),
+        path:path.join(__dirname,"dist"),
         filename:'[name].[hash].js'
     },
-    module:{},
+    module:{
+        rules:{
+            test:/\.css$/,
+            use:[]
+        }
+    },
     plugin:{},
-    devServer:{}
+    devServer:{
+        contentBase:path.join(__dirname,"dist"),
+        port:9090,
+        host:'localhost',
+        overlay:true,
+        compress:true
+    }
 }
