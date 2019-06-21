@@ -7,7 +7,9 @@ module.exports={
     module:{
         rules:{
             test:/\.css$/,
-            use:[]
+            use:['style-loader','css-loader'],
+            include:path.join(__dirname,'src'),
+            exclude:/node_modules/
         }
     },
     plugin:{},
