@@ -35,7 +35,8 @@ module.exports={
     plugins:[
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title:'Simple'
+            title:'Simple',
+            template:'./src/index.html'
         })
     ],
     devServer:{
