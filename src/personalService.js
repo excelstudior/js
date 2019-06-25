@@ -1,17 +1,21 @@
 import React,{Component,Fragment} from 'react';
+import ServiceItem from './serviceItem';
 class PersonalService extends Component{
     constructor(props){
         super(props)
         this.state={
             newService:'',
-            list:['Neck','Shoulder']
+            list:[]
         }
         this.onNewServiceChange=this.onNewServiceChange.bind(this);
         this.AddService=this.AddService.bind(this);
         this.removeService=this.removeService.bind(this);
     }
+
+    componentDidMount=()=>{
+        //send ajax request after DOM elements are mounted.
+    }
     onNewServiceChange=(e)=>{
-        console.log(e.target.value);
         this.setState({
             newService:e.target.value
         })
@@ -20,31 +24,32 @@ class PersonalService extends Component{
         if(this.state.newService!=''){
             this.setState({
             list:[...this.state.list,this.state.newService]
+            },()=>{
+                console.log("setState is async,new item added!")
             })
         }
     }
     removeService=(e)=>{
-        console.log()
-        this.setState({
-            list:[this.state.list.filter((item)=>item!=e.target.innerHTML)]
-        })
+        let filterIndex=e.target.value
+        this.setState(prevState=>({
+            list:prevState.list.filter((item,index)=>index!==filterIndex)
+        }))
         
     }
     render(){
+        const {list,newService}=this.state;
         return(
             <Fragment>
-                <div><input value={this.state.newService}
-                            onChange={this.onNewServiceChange}/>
-                    <button onClick={this.AddService}>Add Service</button>
+                {/*Comments goes here */}
+                <div>
+                    <label htmlFor='ServiceName'>Service :</label>
+                    <input id='ServiceName'
+                           className="input"
+                           value={newService}
+                           onChange={this.onNewServiceChange}/>
+                    <button onClick={this.AddService}>Add</button>
                 </div>
-                <ul>
-                    {
-                        this.state.list.map((item,index)=>{
-                            return (<li key={index+item}
-                                       onClick={this.removeService}>{item}</li>)
-                        })
-                    }
-                </ul>
+                <ServiceItem list={list} removeService={this.removeService}/>
             </Fragment>
         )
     }
