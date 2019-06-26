@@ -11,7 +11,7 @@ module.exports={
         rules:[{
             test:/\.css$/,
             use:['style-loader','css-loader'],
-            include:path.join(__dirname,'src'),
+            include:path.join(__dirname,'public/css'),
             exclude:/node_modules/
         }, {
             test:/\.js$/,
@@ -26,6 +26,7 @@ module.exports={
             exclude: /node_modules/
         },{
             test:/\.(png|jpg|gif)$/,
+            include:path.join(__dirname,'public/img'),
             use:[{
                 loader:'file-loader'
             }]

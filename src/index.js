@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Rose from './img/rose.jpg';
+import Rose from '../public/img/rose.jpg';
 import PersonalService from './personalService';
-import './css/index.css';
+import '../public/css/index.css';
 class App extends React.Component{
     state = {
         reset:'yes'
