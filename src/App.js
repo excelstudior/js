@@ -7,13 +7,13 @@ class App extends Component {
     state = {  }
     render() { 
         return (
-            <Rounter>
-                <Provider store={store}>
+            <Provider store={store}>
+                <Router>
                     <div>
                     Hello App
                     </div>
-                </Provider>
-            </Rounter> 
+                </Router>
+            </Provider>
          )
     }
 }
