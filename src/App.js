@@ -5,6 +5,8 @@ import store from './Store';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import Header from './Components/Header/header'
 import Aside from './Components/Aside/aside'
+import Home from './Pages/Home'
+import UserList from './Pages/User/UserList'
 import routes from './Routers/index'
 class App extends Component {
     state = {  }
@@ -24,16 +26,18 @@ class App extends Component {
                                            exact
                                            path={route.path} 
                                            render={props=>(
-                                               <route.component {...props}/>
-                                           )}/>
+                                            <route.component {...props}/>
+                                           )
+                                           }/>
                                 )
                             } else {
                                 return(
                                     <Route key={key}
                                            path={route.path} 
                                            render={props=>(
-                                               <route.component {...props}/>
-                                           )}/>
+                                            <route.component {...props}/>
+                                           )
+                                           }/>
                                 )
                             }
                         })

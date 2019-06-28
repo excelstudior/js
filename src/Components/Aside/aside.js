@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 class Aside extends Component {
     state = {  }
     render() { 
@@ -12,16 +13,46 @@ class Aside extends Component {
                     <div className='navs'>
                         <ul className='list-unstyled'>
                             <li>
-                                <a href="/" className='active'>
+                                <Link to="/Home" className='active'>
                                     <i className='fa fa-area-chart'></i>
                                     Date Analyse
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="index.html" className='active'>
-                                    <i className='fa fa-area-chart'></i>
-                                    Date Analyse
-                                </a>
+                                <Link to ="/UserList" className='active'>
+                                    <i className='fa fa-user'></i>
+                                    User Management
+                                </Link>
+                            </li>
+                            <li>
+                                <Link>
+                                <i className='fa fa-object-group'></i>
+                                Course Management
+                                <i className='arrow fa fa-angle-right'></i>
+                                </Link>
+                                <ul className='list-unstyled'>
+                                    <li>
+                                        <Link to='/Course'>
+                                        <i className='fa fa-plus'>
+                                            New Course
+                                        </i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/CourseList'>
+                                        <i className='fa fa-list'>
+                                            Courses
+                                        </i>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/CourseCategory'>
+                                        <i className='fa fa-tags'>
+                                            Course Category
+                                        </i>
+                                        </Link>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
 
