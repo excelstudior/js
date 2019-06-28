@@ -4,6 +4,18 @@ const defaultState={
 }
 
 const reducer=(state=defaultState,action)=>{
-    return state;
+    switch(action.type){
+        case 'CHANGE_INPUT_VALUE':{
+            state.inputValue=action.value
+            return state
+        }
+        case 'SUBMIT_NEW_ITEM':{
+            state.list=[...state.list,state.inputValue]
+            return state
+        }
+        default:
+        return state;
+    }
+    
 }
 export default reducer
