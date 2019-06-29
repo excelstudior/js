@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import store from './store/index';
-
+import {CHANGE_INPUT_VALUE,
+    SUBMIT_NEW_ITEM,
+    DELETE_ITEM
+} from './store/constants'
 
 
 const Item=({content})=>{
@@ -30,7 +33,7 @@ class List extends Component {
     }
     submitNewItem(){
         const action={
-            type:'SUBMIT_NEW_ITEM',
+            type:SUBMIT_NEW_ITEM,
             value:this.state.inputValue
         }
         store.dispatch(action)
@@ -39,7 +42,7 @@ class List extends Component {
         let doesItemExists=this.findItem();
         if (doesItemExists){
             const action={
-                type:'DELETE_ITEM',
+                type:DELETE_ITEM,
                 value:this.state.inputValue
             }
             store.dispatch(action)
@@ -59,10 +62,9 @@ class List extends Component {
     }
 
     handleInputChange(e){
-        //console.log(e.target.value)
         //create action
         const action={
-            type:'CHANGE_INPUT_VALUE',
+            type:CHANGE_INPUT_VALUE,
             value:e.target.value
         }
         store.dispatch(action)

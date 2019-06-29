@@ -1,3 +1,7 @@
+import {CHANGE_INPUT_VALUE,
+    SUBMIT_NEW_ITEM,
+    DELETE_ITEM
+} from './constants'
 const defaultState={
     inputValue:'',
     list:['apple','orange','banana','pear']
@@ -5,15 +9,15 @@ const defaultState={
 
 const reducer=(state=defaultState,action)=>{
     switch(action.type){
-        case 'CHANGE_INPUT_VALUE':{
+        case CHANGE_INPUT_VALUE:{
             state.inputValue=action.value
             return state
         }
-        case 'SUBMIT_NEW_ITEM':{
+        case SUBMIT_NEW_ITEM:{
             state.list=[...state.list,state.inputValue]
             return state
         }
-        case 'DELETE_ITEM':{
+        case DELETE_ITEM:{
             state.list=state.list.filter((item,index)=>{
                 if(item!=action.value){
                     return item
