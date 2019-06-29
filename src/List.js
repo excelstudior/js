@@ -23,15 +23,32 @@ class List extends Component {
         this.state=store.getState() 
         this.handleInputChange=this.handleInputChange.bind(this)
         this.handleStoreChange=this.handleStoreChange.bind(this)
-        this.SubmitNewItem=this.SubmitNewItem.bind(this)
+        this.submitNewItem=this.submitNewItem.bind(this)
+        this.deleteItem=this.deleteItem.bind(this)
+        this.findItem=this.findItem.bind(this)
         store.subscribe(this.handleStoreChange)
     }
-    SubmitNewItem(){
+    submitNewItem(){
         const action={
             type:'SUBMIT_NEW_ITEM',
             value:this.state.inputValue
         }
         store.dispatch(action)
+    }
+    deleteItem(){
+        let doesItemExists=this.findItem();
+        if (doesItemExists){
+            const action={
+                type:'DELETE_ITEM',
+                value:this.state.inputValue
+            }
+            store.dispatch(action)
+        } else{
+            alert("Item doesn't exists!")
+        }
+    }
+    findItem(){
+        return this.state.list.indexOf(this.state.inputValue)>-1
     }
     handleStoreChange(){
         console.log("store change")
@@ -40,6 +57,7 @@ class List extends Component {
         })
         
     }
+
     handleInputChange(e){
         //console.log(e.target.value)
         //create action
@@ -54,7 +72,8 @@ class List extends Component {
         return ( 
             <div>
                 <InputBox handleOnClick={this.handleInputChange}/>
-                <button onClick={this.SubmitNewItem}/>
+                <button onClick={this.submitNewItem} style={{margin:'10px'}}>Add</button>
+                <button onClick={this.deleteItem} style={{margin:'10px'}}>Delete</button>
                 <ul>
                    {contents.map((item,index)=>{
                        return <Item key={item+index} content={item}/>

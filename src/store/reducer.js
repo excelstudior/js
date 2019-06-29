@@ -13,6 +13,14 @@ const reducer=(state=defaultState,action)=>{
             state.list=[...state.list,state.inputValue]
             return state
         }
+        case 'DELETE_ITEM':{
+            state.list=state.list.filter((item,index)=>{
+                if(item!=action.value){
+                    return item
+                }
+            })
+            return state
+        }
         default:
         return state;
     }
