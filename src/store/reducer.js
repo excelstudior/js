@@ -1,7 +1,8 @@
 import {CHANGE_INPUT_VALUE,
     SUBMIT_NEW_ITEM,
     DELETE_ITEMS,
-    DELETE_SELECTED_ITEM
+    DELETE_SELECTED_ITEM,
+    INIT_LIST
 } from './constants'
 const defaultState={
     inputValue:'',
@@ -36,6 +37,11 @@ const reducer=(state=defaultState,action)=>{
                         return item
                     }
                 })
+             })
+        }
+        case INIT_LIST:{
+            return Object.assign({},state,{
+                    list:action.list
              })
         }
         default:

@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import store from './store/index';
+import axios from 'axios';
 import { getInputValue,
     submitNewItem,
     deleteItems,
-    deleteSeletedItem
+    deleteSeletedItem,
+    initList
 } from './store/action'
 
 //only one store
-//keep state immuted using spread operator, Object assign to copy state
-
+//keep state immuted using spread operator, Object assign to copy state, reduce must be pure function
+//createStore
+// store.dispatch
+// store.getState
+// store.subscribe
+//arrow function to pass parameter to prop function
+//function component faster than class component, 
+//doesn't need to execute life-cycle method
 const Item=({content,removeItem,index})=>{
     return(
         <li onClick={removeItem} value={index}>
@@ -34,6 +42,18 @@ class List extends Component {
         //this.deleteCurrentItem=this.deleteCurrentItem.bind(this)
         this.findItem=this.findItem.bind(this)
         store.subscribe(this.handleStoreChange)
+    }
+    componentDidMount(){
+        axios({
+            method: 'get',
+            url: 'http://localhost:3001/list.json',
+            headers: {'Access-Control-Allow-Origin': '*'},
+        }).then((res)=>{
+            const data=res.data
+            const action=initList(data)
+            store.dispatch(action)
+        }).catch((error)=>console.log(error))
+        
     }
     submitNewItem(){
         const action=submitNewItem(this.state.inputValue)
