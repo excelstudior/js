@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import store from './store/index';
-import {CHANGE_INPUT_VALUE,
-    SUBMIT_NEW_ITEM,
-    DELETE_ITEM
-} from './store/constants'
+import { getInputValue,
+    submitNewItem,
+    deleteItems,
+    deleteSeletedItem
+} from './store/action'
 
+//only one store
+//keep state immuted using spread operator, Object assign to copy state
 
-const Item=({content})=>{
+const Item=({content,removeItem,index})=>{
     return(
-        <li>
+        <li onClick={removeItem} value={index}>
             This is {content}
         </li>
     )
@@ -28,27 +31,28 @@ class List extends Component {
         this.handleStoreChange=this.handleStoreChange.bind(this)
         this.submitNewItem=this.submitNewItem.bind(this)
         this.deleteItem=this.deleteItem.bind(this)
+        //this.deleteCurrentItem=this.deleteCurrentItem.bind(this)
         this.findItem=this.findItem.bind(this)
         store.subscribe(this.handleStoreChange)
     }
     submitNewItem(){
-        const action={
-            type:SUBMIT_NEW_ITEM,
-            value:this.state.inputValue
-        }
+        const action=submitNewItem(this.state.inputValue)
         store.dispatch(action)
     }
     deleteItem(){
         let doesItemExists=this.findItem();
         if (doesItemExists){
-            const action={
-                type:DELETE_ITEM,
-                value:this.state.inputValue
-            }
+            const action=deleteItems(this.state.inputValue)
             store.dispatch(action)
         } else{
             alert("Item doesn't exists!")
         }
+    }
+    deleteCurrentItem(e){
+        console.log(e)
+            const action=deleteSeletedItem(e.target.value)
+            store.dispatch(action)
+      
     }
     findItem(){
         return this.state.list.indexOf(this.state.inputValue)>-1
@@ -63,10 +67,7 @@ class List extends Component {
 
     handleInputChange(e){
         //create action
-        const action={
-            type:CHANGE_INPUT_VALUE,
-            value:e.target.value
-        }
+        const action=getInputValue(e.target.value)
         store.dispatch(action)
     }
     render() { 
@@ -78,7 +79,10 @@ class List extends Component {
                 <button onClick={this.deleteItem} style={{margin:'10px'}}>Delete</button>
                 <ul>
                    {contents.map((item,index)=>{
-                       return <Item key={item+index} content={item}/>
+                       return <Item key={item+index} 
+                                    index={index} 
+                                    content={item} 
+                                    removeItem={this.deleteCurrentItem}/>
                    })}
                     
                 </ul>
