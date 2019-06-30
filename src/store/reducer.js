@@ -2,11 +2,13 @@ import {CHANGE_INPUT_VALUE,
     SUBMIT_NEW_ITEM,
     DELETE_ITEMS,
     DELETE_SELECTED_ITEM,
-    INIT_LIST
+    MARK_ITEM,
+    INIT_SUBREDDIT_LIST,
 } from './constants'
 const defaultState={
     inputValue:'',
-    list:['apple','orange','banana','pear']
+    list:['apple','orange','banana','pear'],
+    subredditList:[]
 }
 
 const reducer=(state=defaultState,action)=>{
@@ -39,9 +41,27 @@ const reducer=(state=defaultState,action)=>{
                 })
              })
         }
-        case INIT_LIST:{
+        case INIT_SUBREDDIT_LIST:{
             return Object.assign({},state,{
-                    list:action.list
+                subredditList:action.list.map((item)=>{
+                    console.log(item.data.title)
+                    let redditItem={
+                        title:item.data.title,
+                        mark:false
+                    }
+                    return redditItem
+                })
+             })
+        }
+        case MARK_ITEM:{
+            return Object.assign({},state,{
+                subredditList:state.subredditList.map((item,index)=>{
+                    if (index!=action.index){
+                        return item
+                    } else {
+                        return Object.assign({},item,{mark:!item.mark})
+                    }
+                })
              })
         }
         default:

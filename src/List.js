@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import store from './store/index';
-import axios from 'axios';
 import { getInputValue,
     submitNewItem,
     deleteItems,
     deleteSeletedItem,
-    initList
+    getSubreddit,
+    markItem
+    // initList
 } from './store/action'
+import './css/index.css'
 
 //only one store
 //keep state immuted using spread operator, Object assign to copy state, reduce must be pure function
@@ -17,9 +19,9 @@ import { getInputValue,
 //arrow function to pass parameter to prop function
 //function component faster than class component, 
 //doesn't need to execute life-cycle method
-const Item=({content,removeItem,index})=>{
+const Item=({content,removeItem,index,markItem})=>{
     return(
-        <li onClick={removeItem} value={index}>
+        <li onClick={removeItem} value={index} className={markItem?'read':'unread'}>
             This is {content}
         </li>
     )
@@ -39,20 +41,19 @@ class List extends Component {
         this.handleStoreChange=this.handleStoreChange.bind(this)
         this.submitNewItem=this.submitNewItem.bind(this)
         this.deleteItem=this.deleteItem.bind(this)
-        //this.deleteCurrentItem=this.deleteCurrentItem.bind(this)
+        this.loadSubredditTitles=this.loadSubredditTitles.bind(this)
         this.findItem=this.findItem.bind(this)
+        this.markItem=this.markItem.bind(this)
         store.subscribe(this.handleStoreChange)
     }
+    loadSubredditTitles(){
+        const action=getSubreddit('nba')
+        store.dispatch(action)
+        
+    }
     componentDidMount(){
-        axios({
-            method: 'get',
-            url: 'http://localhost:3001/list.json',
-            headers: {'Access-Control-Allow-Origin': '*'},
-        }).then((res)=>{
-            const data=res.data
-            const action=initList(data)
-            store.dispatch(action)
-        }).catch((error)=>console.log(error))
+        const action=getSubreddit('csharp')
+        store.dispatch(action)
         
     }
     submitNewItem(){
@@ -69,20 +70,21 @@ class List extends Component {
         }
     }
     deleteCurrentItem(e){
-        console.log(e)
             const action=deleteSeletedItem(e.target.value)
             store.dispatch(action)
-      
     }
     findItem(){
         return this.state.list.indexOf(this.state.inputValue)>-1
+    }
+    markItem(e){
+        const action=markItem(e.target.value)
+        store.dispatch(action)
     }
     handleStoreChange(){
         console.log("store change")
         this.setState(store.getState(),()=>{
             console.log(store.getState())
         })
-        
     }
 
     handleInputChange(e){
@@ -92,11 +94,14 @@ class List extends Component {
     }
     render() { 
         let contents=this.state.list
+        let subredditTitles=this.state.subredditList
+        console.log(subredditTitles)
         return ( 
             <div>
                 <InputBox handleOnClick={this.handleInputChange}/>
                 <button onClick={this.submitNewItem} style={{margin:'10px'}}>Add</button>
                 <button onClick={this.deleteItem} style={{margin:'10px'}}>Delete</button>
+                <button onClick={this.loadSubredditTitles} style={{margin:'10px'}}>Load</button>
                 <ul>
                    {contents.map((item,index)=>{
                        return <Item key={item+index} 
@@ -105,6 +110,16 @@ class List extends Component {
                                     removeItem={this.deleteCurrentItem}/>
                    })}
                     
+                </ul>
+                <ul>
+                   {subredditTitles.map((item,index)=>{
+                       return <Item key={item.title+index}
+                                    index={index}
+                                    content={item.title}
+                                    removeItem={this.markItem}
+                                    markItem={item.mark}
+                                    />
+                   })}
                 </ul>
             </div>
          )
