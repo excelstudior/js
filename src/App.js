@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component,Fragment} from 'react';
+import {ResetCss} from './style.js'
 class App extends Component {
     state = {  }
     render() { 
         return ( 
-            <div>Hello Jianshu</div>
+           <Fragment>
+               <ResetCss/>
+               <div>Hello Jianshu</div>
+           </Fragment>
+            
+           
          )
     }
 }
