@@ -4,7 +4,7 @@ import {
     REMOVE_TODO
 }from './Apps/TodoList/constants'
 const defaultState={
-    pendingTodo:'new',
+    pendingTodo:'',
     todos:[]
 }
 

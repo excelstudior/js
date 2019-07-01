@@ -16,7 +16,7 @@ class TodoList extends Component {
         const {todos,pendingTodo,removeTodo}=this.props;
         return (  
             <div>
-                <input value={pendingTodo} 
+                <input value={pendingTodo} placeholder='new todo'
                        onChange={this.props.changePendingTodo}/>
                 <button onClick={this.props.addTodo}>Add</button>
                 {todos.length>0?<ul>
@@ -24,7 +24,6 @@ class TodoList extends Component {
                            return <Todo index={index} 
                                         todo={todo}
                                         removeTodo={removeTodo}/>
-                        // return <li key={index+todo} value={index} onClick={removeTodo}>{todo}</li>
                     })}
                     
                 </ul>:<br/>}
