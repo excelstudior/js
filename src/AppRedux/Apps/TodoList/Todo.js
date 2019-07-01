@@ -1,21 +1,33 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {changePendingTodoValue} from './action'
+import {changePendingTodoValue,addTodo,removeTodo} from './action'
+
+const Todo=({index,todo,removeTodo})=>{
+    return <li key={index+todo} value={index} onClick={removeTodo}>{todo}</li>
+}
 
 class TodoList extends Component {
     constructor(props){
         super(props)
-        //this.handleValueChange=this.handleValueChange.bind(this)
     }
 
-    // handleValueChange(e){
-    //     console.log(e.target.value)
-    //     //this.props.
-    // }
     render() { 
+        console.log(this.state)
+        const {todos,pendingTodo,removeTodo}=this.props;
         return (  
             <div>
-                <input value={this.props.pendingTodo} onChange={this.props.changePendingTodo}/><button>Add</button>
+                <input value={pendingTodo} 
+                       onChange={this.props.changePendingTodo}/>
+                <button onClick={this.props.addTodo}>Add</button>
+                {todos.length>0?<ul>
+                    {todos.map((todo,index)=>{
+                           return <Todo index={index} 
+                                        todo={todo}
+                                        removeTodo={removeTodo}/>
+                        // return <li key={index+todo} value={index} onClick={removeTodo}>{todo}</li>
+                    })}
+                    
+                </ul>:<br/>}
             </div>
         )
     }
@@ -23,15 +35,25 @@ class TodoList extends Component {
 //state as parameter and return and object
 const mapStateToProps=(state)=>{
     return{
-        pendingTodo:state.pendingTodo
+        pendingTodo:state.pendingTodo,
+        todos:state.todos
     }
 }
 const mapDispatchToProps=(dispatch)=>{
     return{
         changePendingTodo(e){
-            const action=changePendingTodoValue(e.target.value)
-           console.log(e.target.value)
-            dispatch(action)
+            // const action=changePendingTodoValue(e.target.value)
+            // dispatch(action)
+            var value=e.target.value
+            dispatch(changePendingTodoValue(value))
+        },
+        addTodo(){
+            dispatch(addTodo())
+        },
+        removeTodo(e){
+            var index=e.target.value
+            console.log(index)
+            dispatch(removeTodo(index))
         }
     }
 }
