@@ -40,7 +40,7 @@ class Header extends Component {
                             <CSSTransition timeout={200} in={this.props.focused} classNames='searchBox'>
                             <NavSearch className={this.props.focused?'focus':''}
                                      onFocus={()=>this.props.setSearchBoxFocused(true)}
-                                    //    onBlur={this.handleSearchTextBoxOnBlur}
+                                     onBlur={()=>this.props.setSearchBoxFocused(false)}
                             ></NavSearch>
                             </CSSTransition>
                             <NavSearchIcon className='fa fa-search'></NavSearchIcon>

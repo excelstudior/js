@@ -1,4 +1,4 @@
-const SETFOCUSED='SETFOCUSED';
+export const SETFOCUSED='SETFOCUSED';
 
 export const setFocused=(value)=>({
     type:SETFOCUSED,
