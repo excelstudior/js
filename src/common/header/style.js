@@ -34,6 +34,14 @@ export const NavItem=styled.div`
     &.active{color:#ea6f5a}
 
 `
+export const NavSearchWrapper=styled.div`
+    color:#777;
+`
+export const NavSearchIcon=styled.i`
+    color:#777;
+    margin-left:-29px;
+`
+
 export const NavSearch=styled.input.attrs({
     placeholder:'Find'
 })`
@@ -44,10 +52,14 @@ export const NavSearch=styled.input.attrs({
     border-radius:19px;
     margin-top:9px;
     margin-left:15px;
+    padding-right:30px;
     background:#f0f0f0;
     font-size:17px;
     &::placeholder{
         color:#999;
+    }
+    &.focus{
+        width:250px;
     }
 `
 export const ShortCutDiv=styled.div`
