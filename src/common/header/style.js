@@ -36,6 +36,8 @@ export const NavItem=styled.div`
 `
 export const NavSearchWrapper=styled.div`
     color:#777;
+    
+
 `
 export const NavSearchIcon=styled.i`
     color:#777;
@@ -60,6 +62,18 @@ export const NavSearch=styled.input.attrs({
     }
     &.focus{
         width:250px;
+    }
+    &.searchBox-enter{
+        transition:all .2s ease-out;
+    }
+    &.searchBox-enter-active{
+        width:250px
+    }
+    &.searchBox-exit{
+        transition:all .2s ease-out;
+    }
+    &.searchBox-exit-active{
+        width:180px
     }
 `
 export const ShortCutDiv=styled.div`

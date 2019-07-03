@@ -1,11 +1,17 @@
 import React, { Component,Fragment } from 'react';
-import {HeaderWrapper,Logo,Nav,NavItem,NavSearch,ShortCutDiv,ShortCut,NavSearchWrapper,NavSearchIcon} from './style'
+import {connect} from 'react-redux';
+import {CSSTransition} from 'react-transition-group';
+import {setFocused} from './action'
+import {HeaderWrapper,Logo,Nav,NavItem
+    ,NavSearch,ShortCutDiv,ShortCut
+    ,NavSearchWrapper,NavSearchIcon} from './style'
+
 class Header extends Component {
     constructor(props){
         super(props);
-        this.state = { focused:false }
-        this.handleSearchTextBoxOnFocus=this.handleSearchTextBoxOnFocus.bind(this)
-        this.handleSearchTextBoxOnBlur=this.handleSearchTextBoxOnBlur.bind(this)
+        //this.state = { focused:false }
+        // this.handleSearchTextBoxOnFocus=this.handleSearchTextBoxOnFocus.bind(this)
+        // this.handleSearchTextBoxOnBlur=this.handleSearchTextBoxOnBlur.bind(this)
     }
     
     handleSearchTextBoxOnFocus(){
@@ -31,10 +37,12 @@ class Header extends Component {
                         <NavItem className='right'>Sign Up</NavItem>
                         <NavItem className='right'>Log In</NavItem>
                         <NavSearchWrapper >
-                            <NavSearch className={this.state.focused?'focus':''}
-                                       onFocus={this.handleSearchTextBoxOnFocus}
-                                       onBlur={this.handleSearchTextBoxOnBlur}
+                            <CSSTransition timeout={200} in={this.props.focused} classNames='searchBox'>
+                            <NavSearch className={this.props.focused?'focus':''}
+                                     onFocus={()=>this.props.setSearchBoxFocused(true)}
+                                    //    onBlur={this.handleSearchTextBoxOnBlur}
                             ></NavSearch>
+                            </CSSTransition>
                             <NavSearchIcon className='fa fa-search'></NavSearchIcon>
                         </NavSearchWrapper>
                             
@@ -52,4 +60,17 @@ class Header extends Component {
     }
 }
  
-export default Header;
+const mapStateToProps=(state)=>{
+    return{
+        focused:state.focused
+    }
+}
+
+const mapStateToDispatch=(dispatch)=>{
+    return{
+        setSearchBoxFocused(value){
+            console.log(value)
+            dispatch(setFocused(value))}
+    }
+}
+export default connect(mapStateToProps,mapStateToDispatch)(Header);

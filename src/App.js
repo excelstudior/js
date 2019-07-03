@@ -1,16 +1,17 @@
-import React, { Component,Fragment} from 'react';
+import React, { Component} from 'react';
 import {ResetCss} from './style.js'
+import {Provider} from 'react-redux'
+import store from './store/index'
 import Header from './common/header/index';
 class App extends Component {
-    state = {  }
+    
     render() { 
         return ( 
-           <Fragment>
+            <Provider store={store}>
                <ResetCss/>
                <Header/>
                <div>Hello Jianshu</div>
-           </Fragment>
-            
+           </Provider>
            
          )
     }
