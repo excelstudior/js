@@ -27,8 +27,11 @@ export const Nav=styled.div`
 export const NavItem=styled.div`
     line-height:56px;
     padding:0px 15px;
-    font-size:17px;
+    font-size:15px;
     color:#333;
+    &:hover{
+        background-color:#f0f0f0;
+    }
     &.left{float:left;}
     &.right{float:right;color:#969696}
     &.active{color:#ea6f5a}
@@ -56,7 +59,7 @@ export const NavSearch=styled.input.attrs({
     margin-left:15px;
     padding-right:30px;
     background:#f0f0f0;
-    font-size:17px;
+    font-size:15px;
     &::placeholder{
         color:#999;
     }

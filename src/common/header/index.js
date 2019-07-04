@@ -1,7 +1,8 @@
 import React, { Component,Fragment } from 'react';
 import {connect} from 'react-redux';
 import {CSSTransition} from 'react-transition-group';
-import {setFocused} from './action'
+import {setFocused} from './action';
+import {Link} from 'react-router-dom';
 import {HeaderWrapper,Logo,Nav,NavItem
     ,NavSearch,ShortCutDiv,ShortCut
     ,NavSearchWrapper,NavSearchIcon} from './style'
@@ -34,7 +35,7 @@ class Header extends Component {
                     <Nav>
                         <NavItem className='left active'>Home</NavItem>
                         <NavItem className='left'>About</NavItem>
-                        <NavItem className='right'>Sign Up</NavItem>
+                        <NavItem className='right'><Link to='/signUp'>Sign Up</Link></NavItem>
                         <NavItem className='right'>Log In</NavItem>
                         <NavSearchWrapper >
                             <CSSTransition timeout={200} in={this.props.focused} classNames='searchBox'>

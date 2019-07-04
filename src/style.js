@@ -44,3 +44,9 @@ export const ResetCss=createGlobalStyle`
         border-spacing: 0;
     }
 `
+export const HyperLink=createGlobalStyle`
+    a{
+        text-decoration:none;
+        color:inherit
+    }
+`
