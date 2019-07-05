@@ -13,16 +13,16 @@ export const Logo=styled.a.attrs({
     top:0;
     left:0;
     display:block;
-    width:100px;
+    width:56px;
     height:56px;
     background:url(${bitcoin50});
     background-repeat:no-repeat;
     background-size:contain;
 `;
 export const Nav=styled.div`
-    width:960px;padding-right:70px;box-sizing:border-box;
+    width:680px;padding-right:70px;box-sizing:border-box;
     height:100%;
-    margin:0 auto;
+    margin:0 auto 0 56px;
 `;
 export const NavItem=styled.div`
     line-height:56px;
@@ -63,28 +63,22 @@ export const NavSearch=styled.input.attrs({
     &::placeholder{
         color:#999;
     }
-    &.focus{
+    &:focus{
         width:250px;
+        transition:all .2s ease;
     }
-    &.searchBox-enter{
-        transition:all .2s ease-out;
-    }
-    &.searchBox-enter-active{
-        width:250px
-    }
-    &.searchBox-exit{
-        transition:all .2s ease-out;
-    }
-    &.searchBox-exit-active{
-        width:180px
+    &:not(:focus){
+        width:180px;
+        transition:all .2s ease;
     }
 `
+
 export const ShortCutDiv=styled.div`
     position:absolute;
     right:0;
     top:0;
     height:56px;
-`;
+`
 export const ShortCut=styled.div`
     float:right;
     line-height:38px;

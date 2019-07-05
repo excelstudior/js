@@ -1,9 +1,9 @@
-import {SETFOCUSED} from '../common/header/action'
+import {SETFOCUSED} from './action'
 const defaultState={
     focused:false
 };
 
-const reducer=(state=defaultState,action)=>{
+const header=(state=defaultState,action)=>{
     console.log(state)
      console.log(action)
     switch(action.type){
@@ -14,4 +14,4 @@ const reducer=(state=defaultState,action)=>{
         return state
     }
 }
-export default reducer
+export default header
