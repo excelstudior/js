@@ -27,7 +27,7 @@ export const Nav=styled.div`
 export const NavItem=styled.div`
     line-height:56px;
     padding:0px 15px;
-    font-size:15px;
+    font-size:14px;
     color:#333;
     &:hover{
         background-color:#f0f0f0;
@@ -39,8 +39,8 @@ export const NavItem=styled.div`
 `
 export const NavSearchWrapper=styled.div`
     color:#777;
-    
-
+    position:relative;
+    float:left;
 `
 export const NavSearchIcon=styled.i`
     color:#777;
@@ -59,7 +59,7 @@ export const NavSearch=styled.input.attrs({
     margin-left:15px;
     padding-right:30px;
     background:#f0f0f0;
-    font-size:15px;
+    font-size:14px;
     &::placeholder{
         color:#999;
     }
@@ -78,6 +78,7 @@ export const ShortCutDiv=styled.div`
     right:0;
     top:0;
     height:56px;
+    font-size:14px;
 `
 export const ShortCut=styled.div`
     float:right;
@@ -89,4 +90,37 @@ export const ShortCut=styled.div`
     border:1px solid #ec6149;
     &.nba{color:#ec6149;}
     &.espn{color:#fff;background:#ec6149}
+`
+export const Trending=styled.div`
+    position:absolute;
+    left:0;
+    top:56px;
+    width:240px;
+    padding:0 20px;
+    background:white;
+    box-shadow:0 0 8px rgba(0,0,0,.2);
+`
+export const TrendingTitle=styled.div`
+    margin-top:20px;
+    margin-bottom:15px;
+    line-height:20px;
+    font-size:14px;
+    color:#969696;
+`
+export const TrendingRefresh=styled.span`
+    float:right;
+    font-size:12px;
+`
+export const TrendingItems=styled.div`
+    font-size:13px;
+`
+export const TrendingItem=styled.a`
+    display:block;
+    float:left;
+    border:1px solid #969696;
+    padding:2px 5px;
+    line-height:15px;
+    border-radius:2px;
+    margin-bottom:15px;
+    margin-right:10px;
 `

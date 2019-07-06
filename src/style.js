@@ -47,6 +47,6 @@ export const ResetCss=createGlobalStyle`
 export const HyperLink=createGlobalStyle`
     a{
         text-decoration:none;
-        color:inherit
+        color:inherit;
     }
 `

@@ -5,7 +5,8 @@ import {setFocused} from './action';
 import {Link} from 'react-router-dom';
 import {HeaderWrapper,Logo,Nav,NavItem
     ,NavSearch,ShortCutDiv,ShortCut
-    ,NavSearchWrapper,NavSearchIcon} from './style';
+    ,NavSearchWrapper,NavSearchIcon
+    ,Trending,TrendingTitle, TrendingRefresh,TrendingItems,TrendingItem} from './style';
 
 
 class Header extends Component {
@@ -18,13 +19,28 @@ class Header extends Component {
             <HeaderWrapper>
             <Logo/>
             <Nav>
-                <NavItem className='left active'>Home</NavItem>
-                <NavItem className='left'>About</NavItem>
-                <NavItem className='right'><Link to='/signUp'>Sign Up</Link></NavItem>
-                <NavItem className='right'>Log In</NavItem>
+                <NavItem className='left active'>HOME</NavItem>
+                <NavItem className='left'>ABOUT</NavItem>
+                <NavItem className='right'><Link to='/signUp'>SIGN UP</Link></NavItem>
+                <NavItem className='right'>LOG IN</NavItem>
                 <NavSearchWrapper >                 
                     <NavSearch></NavSearch>
                     <NavSearchIcon className='fa fa-search'></NavSearchIcon>
+                    <Trending>
+                        <TrendingTitle>Trending
+                            <TrendingRefresh>Refresh</TrendingRefresh>
+                        </TrendingTitle>
+                        <TrendingItems>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item122</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem>Item1</TrendingItem>
+                        </TrendingItems>
+                    </Trending>
                 </NavSearchWrapper>
             </Nav>
             <ShortCutDiv>
