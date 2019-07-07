@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import {CSSTransition} from 'react-transition-group';
-import {setFocused} from './action';
+import {getSubreddit} from './action';
 import {Link} from 'react-router-dom';
 import {HeaderWrapper,Logo,Nav,NavItem
     ,NavSearch,ShortCutDiv,ShortCut
@@ -55,14 +54,14 @@ class Header extends Component {
 // state of header sits in main state tree, header node 
 const mapStateToProps=(state)=>{
     return{
-        focused:state.header.focused
+        // focused:state.header.focused
     }
 }
 
 const mapStateToDispatch=(dispatch)=>{
     return{
-        setSearchBoxFocused(value){
-            dispatch(setFocused(value))}
+        // setSearchBoxFocused(value){
+        //     dispatch(setFocused(value))}
     }
 }
 export default connect(mapStateToProps,mapStateToDispatch)(Header);

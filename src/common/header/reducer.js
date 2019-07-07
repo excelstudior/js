@@ -1,6 +1,7 @@
-import {SETFOCUSED} from './action'
+import {CREATE_SUBREDDIT_LIST} from './action'
 const defaultState={
-    focused:false
+    // focused:false
+    subRedditList=[]
 };
 
 const header=(state=defaultState,action)=>{
@@ -8,8 +9,8 @@ const header=(state=defaultState,action)=>{
      console.log(action)
     switch(action.type){
        
-        case SETFOCUSED:
-            return Object.assign({},state,{focused:action.value})
+        case CREATE_SUBREDDIT_LIST:
+            return Object.assign({},state,{subRedditList:action.list})
         default:
         return state
     }
