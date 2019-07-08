@@ -99,6 +99,9 @@ export const Trending=styled.div`
     padding:0 20px;
     background:white;
     box-shadow:0 0 8px rgba(0,0,0,.2);
+    &.hide{
+        display:none;
+    }
 `
 export const TrendingTitle=styled.div`
     margin-top:20px;

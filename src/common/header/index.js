@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubreddit} from './action';
 import {Link} from 'react-router-dom';
+import {toggleElement} from '../../util';
 import {HeaderWrapper,Logo,Nav,NavItem
     ,NavSearch,ShortCutDiv,ShortCut
     ,NavSearchWrapper,NavSearchIcon
@@ -14,6 +15,9 @@ class Header extends Component {
         this.state={showTrending:false}
         this.showTrending=this.showTrending.bind(this)
     }
+    componentDidMount(){
+        this.props.searchSubReddit('nba')
+    }
 
     showTrending=(show)=>{
         this.setState({showTrending:show})
@@ -21,6 +25,8 @@ class Header extends Component {
 
     render() { 
         const {showTrending}=this.state
+        const {searchSubReddit,subRedditList}=this.props
+        console.log('dd',subRedditList)
         return ( 
             <HeaderWrapper >
             <Logo/>
@@ -29,11 +35,11 @@ class Header extends Component {
                 <NavItem className='left'>ABOUT</NavItem>
                 <NavItem className='right'><Link to='/signUp'>SIGN UP</Link></NavItem>
                 <NavItem className='right'>LOG IN</NavItem>
-                <NavSearchWrapper >                 
-                    <NavSearch onFocus={()=>this.showTrending(true)}
+                <NavSearchWrapper>                 
+                    <NavSearch onFocus={()=>this.showTrending(true)} 
                                ></NavSearch>
                     <NavSearchIcon className='fa fa-search'></NavSearchIcon>
-                    {showTrending?<Trending onBlur={()=>this.showTrending(false)}>
+                    <Trending className={showTrending?'':'hide'}>
                         <TrendingTitle>Trending
                             <TrendingRefresh>Refresh</TrendingRefresh>
                         </TrendingTitle>
@@ -47,7 +53,7 @@ class Header extends Component {
                             <TrendingItem>Item1</TrendingItem>
                             <TrendingItem>Item1</TrendingItem>
                         </TrendingItems>
-                    </Trending>:null}
+                    </Trending>
                 </NavSearchWrapper>
             </Nav>
             <ShortCutDiv>
@@ -62,14 +68,14 @@ class Header extends Component {
 // state of header sits in main state tree, header node 
 const mapStateToProps=(state)=>{
     return{
-        // focused:state.header.focused
+      subRedditList:state.header.subRedditList
     }
 }
 
 const mapStateToDispatch=(dispatch)=>{
     return{
-        // setSearchBoxFocused(value){
-        //     dispatch(setFocused(value))}
+        searchSubReddit(subReddit){
+            dispatch(getSubreddit(subReddit))}
     }
 }
 export default connect(mapStateToProps,mapStateToDispatch)(Header);

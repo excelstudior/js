@@ -5,12 +5,14 @@ import store from './store/index'
 import Header from './common/header/index';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import routers from './Router/index'
+import {toggleElement} from './util';
 class App extends Component {
     
     render() { 
         return ( 
         <Provider store={store}>
             <Router>
+            <div onClick={(e)=>toggleElement(e)}>
                <ResetCss/>
                <HyperLink/>
                <Header/>
@@ -25,6 +27,7 @@ class App extends Component {
                         />
                     )
                 })}
+            </div>
             </Router>
         </Provider>
            
