@@ -11,11 +11,18 @@ import {HeaderWrapper,Logo,Nav,NavItem
 class Header extends Component {
     constructor(props){
         super(props);
+        this.state={showTrending:false}
+        this.showTrending=this.showTrending.bind(this)
+    }
+
+    showTrending=(show)=>{
+        this.setState({showTrending:show})
     }
 
     render() { 
+        const {showTrending}=this.state
         return ( 
-            <HeaderWrapper>
+            <HeaderWrapper >
             <Logo/>
             <Nav>
                 <NavItem className='left active'>HOME</NavItem>
@@ -23,14 +30,15 @@ class Header extends Component {
                 <NavItem className='right'><Link to='/signUp'>SIGN UP</Link></NavItem>
                 <NavItem className='right'>LOG IN</NavItem>
                 <NavSearchWrapper >                 
-                    <NavSearch></NavSearch>
+                    <NavSearch onFocus={()=>this.showTrending(true)}
+                               ></NavSearch>
                     <NavSearchIcon className='fa fa-search'></NavSearchIcon>
-                    <Trending>
+                    {showTrending?<Trending onBlur={()=>this.showTrending(false)}>
                         <TrendingTitle>Trending
                             <TrendingRefresh>Refresh</TrendingRefresh>
                         </TrendingTitle>
                         <TrendingItems>
-                            <TrendingItem>Item1</TrendingItem>
+                            <TrendingItem href="http://www.nba.com" target="_blank">NBA</TrendingItem>
                             <TrendingItem>Item1</TrendingItem>
                             <TrendingItem>Item1</TrendingItem>
                             <TrendingItem>Item122</TrendingItem>
@@ -39,7 +47,7 @@ class Header extends Component {
                             <TrendingItem>Item1</TrendingItem>
                             <TrendingItem>Item1</TrendingItem>
                         </TrendingItems>
-                    </Trending>
+                    </Trending>:null}
                 </NavSearchWrapper>
             </Nav>
             <ShortCutDiv>

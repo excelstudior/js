@@ -1,7 +1,7 @@
 import {CREATE_SUBREDDIT_LIST} from './action'
 const defaultState={
     // focused:false
-    subRedditList=[]
+    subRedditList:[]
 };
 
 const header=(state=defaultState,action)=>{
