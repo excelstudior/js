@@ -15,7 +15,9 @@ export const getSubreddit=(subReddit)=>{
         .then((res)=>{
             const children=res.data.data.children
             dispatch(createSubredditList(children))
-        })
+        }).catch((err)=>{
+            console.log(err)
+            dispatch(createSubredditList([]))})
     }
 }
 

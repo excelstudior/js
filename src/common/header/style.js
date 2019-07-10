@@ -48,7 +48,7 @@ export const NavSearchIcon=styled.i`
 `
 
 export const NavSearch=styled.input.attrs({
-    placeholder:'Find'
+    placeholder:'Search in Reddit'
 })`
     width:180px;padding:0px 15px;box-sizing:border-box;
     height:38px;
@@ -95,7 +95,9 @@ export const Trending=styled.div`
     position:absolute;
     left:0;
     top:56px;
-    width:240px;
+    width:340px;
+    height:200px;
+    overflow-Y:scroll;
     padding:0 20px;
     background:white;
     box-shadow:0 0 8px rgba(0,0,0,.2);
@@ -119,11 +121,8 @@ export const TrendingItems=styled.div`
 `
 export const TrendingItem=styled.a`
     display:block;
-    float:left;
-    border:1px solid #969696;
     padding:2px 5px;
     line-height:15px;
-    border-radius:2px;
     margin-bottom:15px;
     margin-right:10px;
 `

@@ -8,11 +8,15 @@ import routers from './Router/index'
 import {toggleElement} from './util';
 class App extends Component {
     
+    componentDidMount(){
+        window.addEventListener('click',toggleElement)
+    }
+
     render() { 
         return ( 
         <Provider store={store}>
             <Router>
-            <div onClick={(e)=>toggleElement(e)}>
+            <div >
                <ResetCss/>
                <HyperLink/>
                <Header/>

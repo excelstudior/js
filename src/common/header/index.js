@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubreddit} from './action';
 import {Link} from 'react-router-dom';
-import {toggleElement} from '../../util';
+//import {toggleElement} from '../../util';
 import {HeaderWrapper,Logo,Nav,NavItem
     ,NavSearch,ShortCutDiv,ShortCut
     ,NavSearchWrapper,NavSearchIcon
@@ -13,16 +13,14 @@ class Header extends Component {
     constructor(props){
         super(props);
         this.state={showTrending:false}
-        this.showTrending=this.showTrending.bind(this)
-    }
-    componentDidMount(){
-        this.props.searchSubReddit('nba')
-    }
-
-    showTrending=(show)=>{
-        this.setState({showTrending:show})
+        this.searchSubreddit=this.searchSubreddit.bind(this)
+        this.searchText=React.createRef()
+        
     }
 
+    searchSubreddit(){
+        this.props.searchSubReddit(this.searchText.current.value)
+    }
     render() { 
         const {showTrending}=this.state
         const {searchSubReddit,subRedditList}=this.props
@@ -35,23 +33,23 @@ class Header extends Component {
                 <NavItem className='left'>ABOUT</NavItem>
                 <NavItem className='right'><Link to='/signUp'>SIGN UP</Link></NavItem>
                 <NavItem className='right'>LOG IN</NavItem>
-                <NavSearchWrapper>                 
-                    <NavSearch onFocus={()=>this.showTrending(true)} 
+                <NavSearchWrapper id='NavSearchWrapper'>                 
+                    <NavSearch ref={this.searchText} onChange={()=>this.searchSubreddit()}
                                ></NavSearch>
                     <NavSearchIcon className='fa fa-search'></NavSearchIcon>
-                    <Trending className={showTrending?'':'hide'}>
+                    <Trending id='Trending' className='hide' >
                         <TrendingTitle>Trending
-                            <TrendingRefresh>Refresh</TrendingRefresh>
+                            <TrendingRefresh onClick={()=>this.searchSubreddit()}>Refresh</TrendingRefresh>
                         </TrendingTitle>
                         <TrendingItems>
-                            <TrendingItem href="http://www.nba.com" target="_blank">NBA</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
-                            <TrendingItem>Item122</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
-                            <TrendingItem>Item1</TrendingItem>
+                            {subRedditList.map((item,index)=>{
+                                return <TrendingItem key={item.title} 
+                                                     href={item.url} 
+                                                     title={item.title}
+                                                     target='_blank'
+                                                     >{(item.title).substring(0,40)+'...'}                                                    
+                                       </TrendingItem>
+                            })}
                         </TrendingItems>
                     </Trending>
                 </NavSearchWrapper>
