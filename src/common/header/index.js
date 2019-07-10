@@ -9,10 +9,29 @@ import {HeaderWrapper,Logo,Nav,NavItem
     ,Trending,TrendingTitle, TrendingRefresh,TrendingItems,TrendingItem} from './style';
 
 
+const SearchResult=({searchSubreddit,subRedditList})=>{
+    return(
+        <Trending id='Trending' className='hide' >
+        <TrendingTitle>Trending
+            <TrendingRefresh onClick={()=>searchSubreddit()}>Refresh</TrendingRefresh>
+        </TrendingTitle>
+        <TrendingItems>
+            {subRedditList.map((item,index)=>{
+                return <TrendingItem key={item.title} 
+                                     href={item.url} 
+                                     title={item.title}
+                                     target='_blank'
+                                     >{(item.title).substring(0,40)+'...'}                                                    
+                       </TrendingItem>
+            })}
+        </TrendingItems>
+    </Trending>
+    )
+}
+
 class Header extends Component {
     constructor(props){
         super(props);
-        this.state={showTrending:false}
         this.searchSubreddit=this.searchSubreddit.bind(this)
         this.searchText=React.createRef()
         
@@ -22,8 +41,8 @@ class Header extends Component {
         this.props.searchSubReddit(this.searchText.current.value)
     }
     render() { 
-        const {showTrending}=this.state
-        const {searchSubReddit,subRedditList}=this.props
+       
+        const {subRedditList}=this.props
         console.log('dd',subRedditList)
         return ( 
             <HeaderWrapper >
@@ -37,21 +56,7 @@ class Header extends Component {
                     <NavSearch ref={this.searchText} onChange={()=>this.searchSubreddit()}
                                ></NavSearch>
                     <NavSearchIcon className='fa fa-search'></NavSearchIcon>
-                    <Trending id='Trending' className='hide' >
-                        <TrendingTitle>Trending
-                            <TrendingRefresh onClick={()=>this.searchSubreddit()}>Refresh</TrendingRefresh>
-                        </TrendingTitle>
-                        <TrendingItems>
-                            {subRedditList.map((item,index)=>{
-                                return <TrendingItem key={item.title} 
-                                                     href={item.url} 
-                                                     title={item.title}
-                                                     target='_blank'
-                                                     >{(item.title).substring(0,40)+'...'}                                                    
-                                       </TrendingItem>
-                            })}
-                        </TrendingItems>
-                    </Trending>
+                   <SearchResult searchSubreddit={this.searchSubreddit} subRedditList={subRedditList} />
                 </NavSearchWrapper>
             </Nav>
             <ShortCutDiv>
