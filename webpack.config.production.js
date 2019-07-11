@@ -1,18 +1,17 @@
 const path=require('path');
 const {CleanWebpackPlugin}=require('clean-webpack-plugin');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
-const MiniCssExtractPlugin=require('mini-css-extract-plugin');
 module.exports={
     entry:'./src/index.js',
     output:{
-        path:path.resolve(__dirname,"dist"),
-        filename:'bundle.[hash:8].js'
+        path:path.resolve(__dirname,"build"),
+        filename:'bundle.js'
     },
     module:{
         rules:[{
             test:/\.css$/,
-            use:[ MiniCssExtractPlugin.loader,'css-loader'],//start from right
-            include:path.resolve(__dirname,'public/css'),
+            use:['style-loader','css-loader'],
+            include:path.join(__dirname,'src'),
             exclude:/node_modules/
         }, {
             test:/\.js$/,
@@ -37,20 +36,11 @@ module.exports={
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title:'Simple',
-            template:'./src/index.html',
-            filename:'index.html',
-            minify:{
-                removeAttributeQuotes:true,
-                collapseWhitespace:true,
-            },
-            hash:true
-        }),
-        new MiniCssExtractPlugin({
-            filename:'main.css'
+            template:'./src/index.html'
         })
     ],
     devServer:{
-        contentBase:path.resolve(__dirname,"dist"),
+        contentBase:path.resolve(__dirname,"build"),
         port:3000,
         host:'localhost',
         overlay:true,

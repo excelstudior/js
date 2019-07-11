@@ -6,6 +6,7 @@ import Header from './common/header/index';
 import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
 import routers from './Router/index'
 import {toggleElement} from './util';
+import '../public/css/common.css'
 class App extends Component {
     
     componentDidMount(){
