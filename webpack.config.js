@@ -36,19 +36,24 @@ module.exports={
                 presets:['@babel/preset-env','@babel/preset-react'],
                 plugins:['@babel/plugin-proposal-class-properties',
                 "@babel/plugin-transform-runtime",
-                "@babel/plugin-transform-spread"
-            ]
+                "@babel/plugin-transform-spread"],
             },
             exclude: /node_modules/
         },{
             test:/\.(png|jpg|gif)$/,
-            use:[{
+            use:{
                 loader:'file-loader'
-            }]
+                ,options:{
+                    outputPath:'img/'
+                }
+            }
         }
         ]
     },
     plugins:[
+        new webpack.ProvidePlugin({
+            '$':'jquery'
+        }),
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title:'Simple',
@@ -61,12 +66,12 @@ module.exports={
             hash:true
         }),
         new MiniCssExtractPlugin({
-            filename:'main.css'
+            filename:'css/main.css'
         }),
-        new webpack.ProvidePlugin({
-            '$':'jquery'
-        })
+        
     ],
+    //watch:true,
+    devtool:'eval-source-map',
     devServer:{
         contentBase:path.resolve(__dirname,"dist"),
         port:3000,
