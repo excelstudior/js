@@ -48,7 +48,7 @@ class Header extends Component {
             <HeaderWrapper >
             <Logo/>
             <Nav>
-                <NavItem className='left active'>HOME</NavItem>
+                <NavItem className='left active'><Link to='/home'>HOME</Link></NavItem>
                 <NavItem className='left'>ABOUT</NavItem>
                 <NavItem className='right'><Link to='/signUp'>SIGN UP</Link></NavItem>
                 <NavItem className='right'>LOG IN</NavItem>
