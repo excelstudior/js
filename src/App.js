@@ -3,7 +3,8 @@ import {ResetCss,HyperLink} from './style.js'
 import {Provider} from 'react-redux'
 import store from './store/index'
 import Header from './common/header/index';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import Nav from './common/nav/nav';
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import routers from './Router/index'
 import {toggleElement} from './util';
 import '../public/css/common.css'
@@ -23,8 +24,21 @@ class App extends Component {
                <HyperLink/>
                <Header/>
                <div>Hello Jianshu</div>
+               <Nav/>
+               <Switch>
                 {routers.map((route,index)=>{
-                    return(
+                    if(route.exact){
+                        return(
+                            <Route key={index}
+                                   exact
+                                   path={route.path}
+                                   render={props=>(
+                                       <route.component {...props}/>
+                                   )}
+                            />
+                        )
+                    } else {
+                        return(
                         <Route key={index}
                                path={route.path}
                                render={props=>(
@@ -32,7 +46,10 @@ class App extends Component {
                                )}
                         />
                     )
+                    }
+                    
                 })}
+                </Switch>
             </div>
             </Router>
         </Provider>
